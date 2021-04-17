@@ -6,7 +6,7 @@ const User = require('../models/user.model')
 
 class Database {
   async init () {
-    this.sequelize = new Sequelize(config.database.name,
+    Database.sequelize = new Sequelize(config.database.name,
       config.database.username,
       config.database.password, {
         host: config.database.host,
@@ -23,7 +23,7 @@ class Database {
   }
 
   get Database () {
-    return this.sequelize
+    return Database.sequelize
   }
 
   get Models () {
@@ -33,7 +33,7 @@ class Database {
 
   async getStatus () {
     try {
-      await this.sequelize.authenticate()
+      await Database.sequelize.authenticate()
       logger.info('Database connection has been established successfully.')
       return { ok: true }
     } catch (error) {
@@ -44,9 +44,9 @@ class Database {
 
   async addModels () {
     for (const modelDefiner of this.modelDefiners) {
-      modelDefiner(this.sequelize)
+      modelDefiner(Database.sequelize)
     }
-    await this.sequelize.sync({ force: true })
+    await Database.sequelize.sync({ force: true })
   }
 }
 
