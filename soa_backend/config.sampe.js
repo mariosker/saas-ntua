@@ -6,7 +6,7 @@ const config = {
       host: 'localhost',
       name: 'database',
       username: 'postgres',
-      passsword: 'postgres',
+      password: 'postgres',
       port: DBPORT || 5432
     },
     server: { port: PORT || 3000 },
@@ -17,7 +17,7 @@ const config = {
       host: 'localhost',
       name: 'database',
       username: 'postgres',
-      passsword: 'postgres',
+      password: 'postgres',
       port: DBPORT || 5432
     },
     server: { port: PORT || 3000 },
