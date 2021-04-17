@@ -1,11 +1,25 @@
-const { PORT, NODE_ENV } = process.env
+const { DBPORT, PORT, NODE_ENV } = process.env
 
 const config = {
   development: {
+    database: {
+      host: 'localhost',
+      name: 'database',
+      username: 'postgres',
+      passsword: 'postgres',
+      port: DBPORT || 5432
+    },
     server: { port: PORT || 3000 },
     env: 'development'
   },
   production: {
+    database: {
+      host: 'localhost',
+      name: 'database',
+      username: 'postgres',
+      passsword: 'postgres',
+      port: DBPORT || 5432
+    },
     server: { port: PORT || 3000 },
     env: 'production'
   }
