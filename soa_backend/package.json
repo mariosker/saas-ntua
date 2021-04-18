@@ -16,6 +16,7 @@
   "author": "Marios Kerasiotis, Ioannis Kerasiotis",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",

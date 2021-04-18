@@ -2,7 +2,6 @@ const express = require('express')
 const https = require('https')
 const fs = require('fs')
 const path = require('path')
-const indexRouter = require('../routes/index')
 const logger = require('../utils/logger')
 const morganMiddleware = require('../middleware/morganMiddleware')
 const config = require('../config')
@@ -30,7 +29,8 @@ class ExpressLoader {
     app.use(express.urlencoded({ extended: false }))
 
     // Pass app to routes
-    app.use('/', indexRouter)
+    const indexRouter = require('../routes/index')
+    app.use(indexRouter)
 
     // error handler
     app.use(ExpressLoader.errorHandler)
