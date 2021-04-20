@@ -1,4 +1,5 @@
-const { logger, createError, response } = require('../../loaders/common')
+const { logger, createError } = require('../../loaders/common')
+
 const UserService = require('../../services/User')
 const userService = new UserService()
 
