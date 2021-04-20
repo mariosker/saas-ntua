@@ -46,7 +46,7 @@ class Database {
     for (const modelDefiner of this.modelDefiners) {
       modelDefiner(Database.sequelize)
     }
-    await Database.sequelize.sync({ force: true })
+    await Database.sequelize.sync({ force: false })
   }
 }
 
