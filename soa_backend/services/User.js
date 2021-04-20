@@ -72,7 +72,7 @@ class User {
 
     try {
       await sequelize.transaction(async (t) => {
-        const selectedUser = await userModel.findAll({
+        const selectedUser = await userModel.findOne({
           where: {
             [Op.or]:
               {
@@ -83,16 +83,16 @@ class User {
           }
         })
 
-        const matched = await bcrypt.compare(user.password, selectedUser[0]?.dataValues.password)
+        const matched = await bcrypt.compare(user.password, selectedUser.dataValues.password)
 
-        returnUser = matched ? selectedUser[0].dataValues : null
+        returnUser = matched ? selectedUser.dataValues : null
         delete returnUser.password
 
         return matched ? selectedUser : null
       })
     } catch (err) {
-      logger.error('Create user not working', err)
-      throw createError(400, 'Cannot create user')
+      logger.error('Login Error', err)
+      throw createError(400, 'Login')
     }
     return returnUser
   }

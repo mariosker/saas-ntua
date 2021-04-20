@@ -7,7 +7,6 @@ async function login (req, res, next) {
   const user = req.body
   try {
     const response = await userService.login(user)
-    console.debug('here', response)
     res.send(response)
   } catch (error) {
     logger.error(error)
