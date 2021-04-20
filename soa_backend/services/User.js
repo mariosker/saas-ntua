@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const { Op } = require('sequelize')
 const { logger, sequelize, config, createError } = require('../loaders/common')
 const validator = require('validator')
 const userModel = sequelize.models.User
@@ -64,7 +65,36 @@ class User {
     }
 
     return returnUser
+  }
 
+  async login (user) {
+    let returnUser = null
+
+    try {
+      await sequelize.transaction(async (t) => {
+        const selectedUser = await userModel.findAll({
+          where: {
+            [Op.or]:
+              {
+                username: user.username,
+                email: user.username
+              }
+
+          }
+        })
+
+        const matched = await bcrypt.compare(user.password, selectedUser[0]?.dataValues.password)
+
+        returnUser = matched ? selectedUser[0].dataValues : null
+        delete returnUser.password
+
+        return matched ? selectedUser : null
+      })
+    } catch (err) {
+      logger.error('Create user not working', err)
+      throw createError(400, 'Cannot create user')
+    }
+    return returnUser
   }
 }
 
