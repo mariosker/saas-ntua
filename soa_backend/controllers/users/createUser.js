@@ -7,9 +7,8 @@ async function createUser (req, res, next) {
   try {
     const createdUser = await userService.createUser(user)
     res.send(createdUser)
-    response()
   } catch (error) {
-    logger.error('Create User: ', error)
+    logger.error(error)
     next(createError(500, 'Error creating user', error))
   }
 }
