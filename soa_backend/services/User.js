@@ -39,6 +39,7 @@ class User {
 
     let hash
     let returnUser
+
     try {
       const salt = await bcrypt.genSalt(config.saltRounds)
       hash = await bcrypt.hash(user.password, salt)
@@ -53,6 +54,9 @@ class User {
         const createdUser = await userModel.create(user, { transaction: t })
         delete createdUser.dataValues.password
         returnUser = createdUser.dataValues
+        delete createdUser.password
+        console.log(createdUser.dataValues)
+        return createdUser.dataValues
       })
     } catch (err) {
       logger.error('Create user not working', err)
@@ -60,6 +64,7 @@ class User {
     }
 
     return returnUser
+
   }
 }
 
