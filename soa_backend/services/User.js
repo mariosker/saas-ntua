@@ -38,6 +38,7 @@ class User {
     }
 
     let hash
+    let returnUser
     try {
       const salt = await bcrypt.genSalt(config.saltRounds)
       hash = await bcrypt.hash(user.password, salt)
@@ -50,14 +51,15 @@ class User {
     try {
       await sequelize.transaction(async (t) => {
         const createdUser = await userModel.create(user, { transaction: t })
-        delete createdUser.password
-        console.log(createdUser.dataValues)
-        return createdUser.dataValues
+        delete createdUser.dataValues.password
+        returnUser = createdUser.dataValues
       })
     } catch (err) {
       logger.error('Create user not working', err)
       throw createError(400, 'Cannot create user')
     }
+
+    return returnUser
   }
 }
 
