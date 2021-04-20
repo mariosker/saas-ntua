@@ -7,7 +7,7 @@
     "test": "node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
     "lint": "NODE_ENV=development eslint . --ext .js`",
-    "lint:fix" : "NODE_ENV=development eslint --fix . --ext .js`"
+    "lint:fix": "NODE_ENV=development eslint --fix . --ext .js`"
   },
   "repository": {
     "type": "git",
