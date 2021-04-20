@@ -3,7 +3,9 @@ const config = require('../config')
 const logger = require('../utils/logger')
 
 const User = require('../models/user.model')
-
+const Question = require('../models/question.model')
+const Hashtag = require('../models/hashtag.model')
+const Answer = require('../models/answer.model')
 class Database {
   async init () {
     Database.sequelize = new Sequelize(config.database.name,
@@ -18,17 +20,12 @@ class Database {
           idle: 10000
         }
       })
-    this.modelDefiners = [User]
+    this.modelDefiners = [User, Question, Hashtag, Answer]
     await this.addModels()
   }
 
   get Database () {
     return Database.sequelize
-  }
-
-  get Models () {
-    logger.info('models', this.modelDefiners)
-    return this.modelDefiners
   }
 
   async getStatus () {
@@ -46,6 +43,14 @@ class Database {
     for (const modelDefiner of this.modelDefiners) {
       modelDefiner(Database.sequelize)
     }
+    const models = Database.sequelize.models
+
+    models.User.hasMany(models.Question)
+    models.User.hasMany(models.Answer)
+
+    models.Question.hasMany(models.Answer)
+    models.Question.belongsToMany(models.Hashtag, { through: 'question_hashtag' })
+
     await Database.sequelize.sync({ force: false })
   }
 }
