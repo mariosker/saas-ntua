@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    question: {
+    body: {
       type: DataTypes.TEXT,
       allowNull: false
     }
