@@ -10,7 +10,7 @@ async function login (req, res, next) {
     res.send(response)
   } catch (error) {
     logger.error(error)
-    next(createError(500, 'Error creating user', error))
+    next(createError(500, 'Error on Login', error))
   }
 }
 
