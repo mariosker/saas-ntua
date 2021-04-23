@@ -83,8 +83,6 @@ class User {
           }
         })
 
-        console.debug(selectedUser)
-
         if (selectedUser == null) {
           throw createError(403, 'Not existing user')
         }
