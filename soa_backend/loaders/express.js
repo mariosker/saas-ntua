@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const logger = require('../utils/logger')
 const morganMiddleware = require('../middleware/morganMiddleware')
+const authenticateToken = require('../middleware/authorization')
 const config = require('../config')
 
 class ExpressLoader {
@@ -24,6 +25,7 @@ class ExpressLoader {
 
     // Log requests
     app.use(morganMiddleware)
+    app.use(authenticateToken)
 
     app.use(express.json())
     app.use(express.urlencoded({ extended: false }))

@@ -21,6 +21,18 @@ class JWT {
 
     return user
   }
+
+  static verifyAccessToken (token, callback = null) {
+    let user = null
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, result) => {
+      if (callback != null) callback(err, result)
+
+      if (err) return null
+      user = result
+    })
+
+    return user
+  }
 }
 
 module.exports = JWT
