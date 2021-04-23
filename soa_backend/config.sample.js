@@ -10,6 +10,7 @@ const config = {
       port: DBPORT || 5432
     },
     server: { port: PORT || 3000 },
+    authServer: { port: PORT || 4000 },
     env: 'development',
     ACCESS_TOKEN_SECRET: '',
     REFRESH_TOKEN_SECRET: ''
@@ -24,6 +25,7 @@ const config = {
       port: DBPORT || 5432
     },
     server: { port: PORT || 3000 },
+    authServer: { port: PORT || 4000 },
     env: 'production',
     ACCESS_TOKEN_SECRET: '',
     REFRESH_TOKEN_SECRET: ''

@@ -1,5 +1,6 @@
 const ExpressServer = require('./loaders/express')
 const Database = require('./loaders/database')
+const AuthenticationServer = require('./loaders/auth_server')
 
 async function app () {
   const db = new Database()
@@ -11,10 +12,12 @@ async function app () {
   }
 
   const server = new ExpressServer()
+  const authServer = new AuthenticationServer()
 
   async function shutDown () {
     await db.Database.close()
     await server.shutdown()
+    await authServer.shutdown()
   }
 
   process.on('SIGTERM', shutDown)
