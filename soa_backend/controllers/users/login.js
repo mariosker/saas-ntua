@@ -1,5 +1,4 @@
 const { logger, createError } = require('../../loaders/common')
-const { REFRESH_TOKEN_SECRET } = require('../../config')
 const JWT = require('../../utils/token')
 
 const UserService = require('../../services/User')
@@ -10,7 +9,7 @@ async function login (req, res, next) {
   try {
     const response = await userService.login(user)
 
-    const token = JWT.sign(response, REFRESH_TOKEN_SECRET, {
+    const token = JWT.generateRefreshToken({ data: response }, {
       expiresIn: '90 days'
     })
 

@@ -2,9 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
-router.get('/token', (req, res) => {
-  console.log(req)
-})
+const generateAccessToken = require('../controllers/auth')
+router.post('/token', generateAccessToken)
 
 const login = require('../controllers/users/login')
 router.post('/users/login', login)
