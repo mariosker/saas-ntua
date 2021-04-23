@@ -46,12 +46,13 @@ class Database {
     const models = Database.sequelize.models
 
     models.User.hasMany(models.Question)
-    models.User.hasMany(models.Answer)
+    models.Question.belongsTo(models.User)
 
+    models.User.hasMany(models.Answer)
     models.Question.hasMany(models.Answer)
     models.Question.belongsToMany(models.Hashtag, { through: 'question_hashtag' })
 
-    await Database.sequelize.sync({ force: false })
+    await Database.sequelize.sync({ force: true })
   }
 }
 
