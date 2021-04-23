@@ -8,4 +8,7 @@ router.post('/token', generateAccessToken)
 const login = require('../controllers/users/login')
 router.post('/users/login', login)
 
+const createUser = require('../controllers/users/createUser')
+router.post('/users/', createUser)
+
 module.exports = router

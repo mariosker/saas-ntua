@@ -7,8 +7,7 @@ const userService = new UserService()
 async function login (req, res, next) {
   const user = req.body
   try {
-    const response = await userService.login(user)
-
+    const response = await userService.login(user)``
     const token = JWT.generateRefreshToken({ data: response }, {
       expiresIn: '90 days'
     })

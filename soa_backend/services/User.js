@@ -56,7 +56,6 @@ class User {
         delete createdUser.dataValues.password
         returnUser = createdUser.dataValues
         delete createdUser.password
-        console.log(createdUser.dataValues)
         return createdUser.dataValues
       })
     } catch (err) {
