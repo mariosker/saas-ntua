@@ -83,16 +83,24 @@ class User {
           }
         })
 
+        console.debug(selectedUser)
+
+        if (selectedUser == null) {
+          throw createError(403, 'Not existing user')
+        }
+
         const matched = await bcrypt.compare(user.password, selectedUser.dataValues.password)
 
-        returnUser = matched ? selectedUser.dataValues : null
+        if (matched === false) throw createError(403, 'Invalid Credentials')
+
+        returnUser = selectedUser.dataValues
         delete returnUser.password
 
-        return matched ? selectedUser : null
+        return returnUser
       })
     } catch (err) {
       logger.error('Login Error', err)
-      throw createError(400, 'Login')
+      throw err
     }
     return returnUser
   }
