@@ -50,7 +50,9 @@ class Database {
 
     models.User.hasMany(models.Answer)
     models.Question.hasMany(models.Answer)
+
     models.Question.belongsToMany(models.Hashtag, { through: 'question_hashtag' })
+    models.Hashtag.belongsToMany(models.Question, { through: 'question_hashtag' })
 
     await Database.sequelize.sync({ force: true })
   }
