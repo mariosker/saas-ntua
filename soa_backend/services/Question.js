@@ -9,6 +9,10 @@ const questionSchema = Joi.object({
   hashtags: Joi.array()
 })
 
+const associateSchema = Joi.object({
+  hashtags: Joi.array()
+}).unknown(true)
+
 class Question {
   async create (question) {
     const { error, value } = questionSchema.validate(question)
@@ -25,14 +29,6 @@ class Question {
           include: [userModel]
         })
 
-        if (value.hashtags !== undefined || value.hashtags.length !== 0) {
-          await value.hashtags.forEach(h => {
-            logger.info(h)
-            returnValue.addHashtag(h)
-          })
-        }
-
-        returnValue = returnValue.dataValues
         console.debug(returnValue)
       })
     } catch (err) {
@@ -40,6 +36,31 @@ class Question {
       throw createError(500, 'Cannot create question')
     }
     return returnValue
+  }
+
+  async associateHashtags (data, question) {
+    const { error, value } = associateSchema.validate(data)
+    if (error) {
+      logger.error('Question not valid', error)
+      throw createError(400, 'Question not valid: {error.message}')
+    }
+    try {
+      if (value.hashtags?.length) {
+        for (const h of value.hashtags) {
+          try {
+            await question.addHashtag(h)
+          } catch (error) {
+            logger.error(error)
+            throw createError(500, 'Cannot associate hashtags')
+          }
+        }
+      }
+      question.dataValues.hashtags = value.hashtags
+      return question
+    } catch (err) {
+      logger.error('Create question not working', err)
+      throw createError(500, 'Cannot create question')
+    }
   }
 }
 

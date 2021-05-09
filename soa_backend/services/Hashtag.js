@@ -1,26 +1,18 @@
 const { logger, sequelize, createError, Joi } = require('../loaders/common')
 const hashtagModel = sequelize.models.Hashtag
 
-// I could substitute the function with Model.findOrCreate()
-// but for some reason it doesn't work
-async function findOrCreateHashtag (hashtagString) {
-  let hashtag
-  hashtag = await hashtagModel.findOne({ where: { hashtag: hashtagString } })
-  if (hashtag === null || hashtag === undefined) {
-    console.log('creating')
-    hashtag = await hashtagModel.create({ hashtag: hashtagString })
-  }
-  return hashtag
-}
-
 async function aux (value) {
   const returnValues = []
-  await value.forEach(
-    async h => {
-      const rv = await findOrCreateHashtag(h)
-      returnValues.push(rv)
+
+  for (const h of value) {
+    try {
+      const rv = await hashtagModel.findOrCreate({ where: { hashtag: h } })
+      returnValues.push(rv[0])
+    } catch (err) {
+      logger.error(err)
     }
-  )
+  }
+  console.log(returnValues)
   return returnValues
 }
 
@@ -32,7 +24,7 @@ class Hashtag {
       logger.error('Hashtags are not valid')
       createError(500, error)
     }
-    if (value === undefined || value.length === 0) return null
+    if (!value?.length) return null
     const hashtagRes = await aux(value)
     return hashtagRes
   }
