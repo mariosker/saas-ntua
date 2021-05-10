@@ -16,6 +16,7 @@ const associateSchema = Joi.object({
 class Question {
   async create (question) {
     const { error, value } = questionSchema.validate(question)
+    
     if (error) {
       logger.error('Question not valid', error)
       throw createError(400, 'Question not valid: {error.message}')
@@ -28,12 +29,8 @@ class Question {
           transaction: t,
           include: [userModel]
         })
-
-        console.debug(returnValue)
-      })
-    } catch (err) {
-      logger.error('Create question not working', err)
-      throw createError(500, 'Cannot create question')
+        returnValue = returnValue.dataValues
+        throw createError(500, 'Cannot create question')
     }
     return returnValue
   }

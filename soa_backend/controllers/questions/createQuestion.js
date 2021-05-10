@@ -10,6 +10,7 @@ async function createQuestion (req, res, next) {
   const question = req.body
   try {
     const createdQuestion = await questionService.create(question)
+    
     if (question.hashtags !== undefined) {
       const hashtags = await hashtagService.create(question.hashtags)
       console.log('controller', hashtags)
