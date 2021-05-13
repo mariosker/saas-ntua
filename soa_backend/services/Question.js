@@ -2,6 +2,7 @@ const { logger, sequelize, createError, Joi } = require('../loaders/common')
 const questionModel = sequelize.models.Question
 const userModel = sequelize.models.User
 const answerModel = sequelize.models.Answer
+const hashtagModel = sequelize.models.Hashtag
 
 const questionSchema = Joi.object({
   UserId: Joi.required(),
@@ -108,6 +109,18 @@ class Question {
       throw createError(500, 'Cannot create answer')
     }
     return returnValue
+  }
+
+  async getQuestions (page, limit) {
+    try {
+      const { count, rows } = await questionModel.findAndCountAll({ offset: (page - 1) * limit, limit: limit, include: [userModel, hashtagModel], distinct: true })
+      console.log('count', count)
+      console.log(rows)
+      return { count: count, questions: rows }
+    } catch (error) {
+      logger.error('Cannot get questions', error)
+      throw createError(500, 'Cannot get questions')
+    }
   }
 }
 module.exports = Question

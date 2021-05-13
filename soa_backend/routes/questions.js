@@ -6,4 +6,8 @@ router.post('', createQuestion)
 
 const answerQuestion = require('../controllers/questions/answerQuestion')
 router.post('/:question_id/:user_id/answers', answerQuestion)
+
+const getQuestions = require('../controllers/questions/getQuestions')
+router.get('/', getQuestions)
+
 module.exports = router
