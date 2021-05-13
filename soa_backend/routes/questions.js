@@ -4,4 +4,6 @@ const router = express.Router()
 const createQuestion = require('../controllers/questions/createQuestion')
 router.post('', createQuestion)
 
+const answerQuestion = require('../controllers/questions/answerQuestion')
+router.post('/:question_id/:user_id/answers', answerQuestion)
 module.exports = router

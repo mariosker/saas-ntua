@@ -56,7 +56,6 @@ class User {
         delete createdUser.dataValues.password
         returnUser = createdUser.dataValues
         delete createdUser.password
-        console.log(createdUser.dataValues)
         return createdUser.dataValues
       })
     } catch (err) {
@@ -101,6 +100,21 @@ class User {
       throw err
     }
     return returnUser
+  }
+
+  async getUser (id) {
+    let user
+    try {
+      user = await userModel.findByPk(id)
+    } catch (error) {
+      logger.error('Error finding user by id', error)
+      throw createError(500, `Cannot get user with id: ${id}`)
+    }
+    if (user === null) {
+      logger.info('Cannot find user')
+      throw createError(500, `Question with id: ${id} doesn't exist`)
+    }
+    return user
   }
 }
 
