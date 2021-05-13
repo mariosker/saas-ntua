@@ -8,7 +8,6 @@ async function createQuestion (req, res, next) {
 
     if (question.hashtags !== undefined) {
       const hashtags = await hashtagService.create(question.hashtags)
-      console.log('controller', hashtags)
       question.hashtags = hashtags
     }
     await questionService.associateHashtags(question, createdQuestion)

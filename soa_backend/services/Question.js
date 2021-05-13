@@ -81,7 +81,6 @@ class Question {
       logger.info('Cannot find question')
       throw createError(500, `Question with id: ${id} doesn't exist`)
     }
-    console.log(question)
     return question
   }
 
