@@ -10,4 +10,7 @@ router.post('/:question_id/:user_id/answers', answerQuestion)
 const getQuestions = require('../controllers/questions/getQuestions')
 router.get('/', getQuestions)
 
+const countQuestionsByDate = require('../controllers/questions/countQuestionsByDate')
+router.get('/count/:from', countQuestionsByDate)
+
 module.exports = router

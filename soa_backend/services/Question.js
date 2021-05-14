@@ -1,8 +1,10 @@
-const { logger, sequelize, createError, Joi } = require('../loaders/common')
+const { logger, Sequelize, sequelize, createError, Joi } = require('../loaders/common')
 const questionModel = sequelize.models.Question
 const userModel = sequelize.models.User
 const answerModel = sequelize.models.Answer
 const hashtagModel = sequelize.models.Hashtag
+const Op = Sequelize.Op
+const moment = require('moment')
 
 const questionSchema = Joi.object({
   UserId: Joi.required(),
@@ -120,6 +122,22 @@ class Question {
     } catch (error) {
       logger.error('Cannot get questions', error)
       throw createError(500, 'Cannot get questions')
+    }
+  }
+
+  async countByDate (date) {
+    const parsedDate = moment(date)
+    if (!(isNaN(date) && !isNaN(parsedDate))) {
+      logger.error('Date not valid')
+      throw createError('Date not valid')
+    }
+    try {
+      const refDate = moment(date)
+      const count = await questionModel.count({ where: { createdAt: { [Op.gte]: refDate } } })
+      return count
+    } catch (error) {
+      logger.error('Cannot count questions by date', error)
+      throw createError(500, 'Cannot count questions by date')
     }
   }
 }
