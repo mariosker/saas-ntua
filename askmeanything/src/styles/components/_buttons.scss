@@ -1,0 +1,46 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.button {
+  text-decoration: none;
+  padding: 0.5rem;
+  margin: auto 0.125rem;
+  border-radius: 0.2rem;
+  border-color: $pumpkin;
+  border-width: 1px;
+  border-style: solid;
+  color: $royal-blue-dark;
+  background-color: $pumpkin;
+  font-family: "Roboto";
+  font-weight: 500;
+  width: 8rem;
+  text-align: center;
+
+  &--1 {
+    background-color: transparent;
+    color: $pumpkin;
+  }
+
+  &--2 {
+    background-color: $pumpkin;
+  }
+
+  &:hover {
+    // border-color: $royal-blue-dark;
+    background-color: transparent;
+    color: $pumpkin;
+  }
+
+  &:active {
+    background-color: $white;
+    color: $royal-blue-dark;
+    border-color: $cadet-blue;
+    @include box_shadow(
+      -0.375rem,
+      0.375rem,
+      1rem,
+      colorsWithOpacity($black, 0.25),
+      0.5rem
+    );
+  }
+}
