@@ -1,10 +1,10 @@
 import React from 'react'
-import DesktopNavBar from './DesktopNavBar'
+import TopNavBar from './TopNavBar'
 
 function Header () {
   return (
         <header>
-            <DesktopNavBar />
+            <TopNavBar />
         </header>
   )
 }
