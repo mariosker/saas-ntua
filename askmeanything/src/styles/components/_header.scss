@@ -1,12 +1,21 @@
 @use '../variables' as *;
 @use '../mixins' as *;
 
-.header {
+header {
+  min-height: 4rem;
   padding: 2rem;
   background: $royal-blue-dark;
-  min-height: 4rem;
-  width: 100%;
-  padding: 0 1.5rem;
+  width: 100vw;
+
+  @include box_shadow(
+    0,
+    0.5rem,
+    0.3125rem,
+    colorsWithOpacity($black, 0.5),
+    0.25rem
+  );
+}
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,20 +25,9 @@
     flex-direction: column;
   }
 
-  @include box_shadow(
-    0,
-    0.5rem,
-    0.3125rem,
-    colorsWithOpacity($black, 0.5),
-    0.25rem
-  );
-
   .buttons {
     display: flex;
     flex-direction: row;
-    @include breakpoint-down("medium") {
-      margin-bottom: 0.825rem;
-    }
   }
 
   .logo {

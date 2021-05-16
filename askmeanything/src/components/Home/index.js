@@ -1,4 +1,5 @@
 import React from 'react'
+import HomeCard from './HomeCard'
 
 function Home () {
   return (
@@ -9,6 +10,12 @@ function Home () {
           <span className='logo--2'>Me</span>
           <span className='logo--3'>Anything</span>
         </h1>
+        <div className='cards'>
+          <HomeCard />
+          <HomeCard />
+          <HomeCard />
+          <HomeCard />
+        </div>
     </main>
   )
 }

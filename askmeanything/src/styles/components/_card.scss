@@ -1,0 +1,12 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.card {
+  @include box_shadow(0, 0.25rem, 0.5rem, colorsWithOpacity($black, 0.2));
+  transition: 0.3s;
+  border-radius: 5px;
+
+  &:hover {
+    @include box_shadow(0, 0.25rem, 1rem, colorsWithOpacity($black, 0.2));
+  }
+}

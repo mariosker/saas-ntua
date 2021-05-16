@@ -1,3 +1,5 @@
+@use 'colors' as *;
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -13,9 +15,17 @@ html {
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+div#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
+  flex: 1;
   padding: 2rem;
+  background-color: $blanched-almond;
 }
