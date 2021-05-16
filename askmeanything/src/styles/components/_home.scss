@@ -1,0 +1,17 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.home {
+  h1.welcomeMessage {
+    color: $black;
+    font-style: italic;
+
+    .logo--1,
+    .logo--3 {
+      color: $pumpkin;
+    }
+    .logo--2 {
+      color: $black;
+    }
+  }
+}
