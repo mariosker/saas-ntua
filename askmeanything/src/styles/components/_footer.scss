@@ -2,10 +2,10 @@
 @use '../mixins' as *;
 
 footer {
-  background-color: $pumpkin;
+  background-color: $royal-blue-dark;
   overflow: hidden;
   width: 100vw;
-  min-height: 3.25rem;
+  min-height: 3rem;
 
   ul {
     display: flex;
@@ -27,7 +27,7 @@ footer {
         text-decoration: none;
 
         font-size: 1.125rem;
-        color: $royal-blue-dark;
+        color: white;
       }
     }
   }
