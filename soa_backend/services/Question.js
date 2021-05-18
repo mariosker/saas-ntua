@@ -22,10 +22,6 @@ const answerSchema = Joi.object({
 
 })
 
-const associateSchema = Joi.object({
-  hashtags: Joi.array()
-}).unknown(true)
-
 class Question {
   async create (question) {
     const { error, value } = questionSchema.validate(question)
@@ -43,7 +39,6 @@ class Question {
         })
         console.debug(returnValue)
       })
-
     } catch (err) {
       logger.error('Create question not working', err)
       throw createError(500, 'Cannot create question')
