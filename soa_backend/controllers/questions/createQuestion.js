@@ -1,6 +1,9 @@
 const { logger, createError } = require('../../loaders/common')
 const { hashtagService, questionService } = require('../../loaders/services')
 
+const HashtagService = require('../../services/Hashtag')
+const hashtagService = new HashtagService()
+
 async function createQuestion (req, res, next) {
   const question = req.body
   try {
