@@ -1,6 +1,6 @@
 const { logger, sequelize, createError, Joi } = require('../loaders/common')
 const hashtagModel = sequelize.models.Hashtag
-
+const moment = require('moment')
 async function aux (value) {
   const returnValues = []
 
@@ -26,6 +26,32 @@ class Hashtag {
     if (!value?.length) return null
     const hashtagRes = await aux(value)
     return hashtagRes
+  }
+
+  async getPopularHashtags (date) {
+    const parsedDate = moment(date)
+    if (!(isNaN(date) && !isNaN(parsedDate))) {
+      logger.error('Date not valid')
+      throw createError('Date not valid')
+    }
+    try {
+      const records = await sequelize.query(
+      `select ha.hashtag, asoc."HashtagId" , asoc.id_count
+      FROM (select question_hashtag."HashtagId" , COUNT(*) as id_count
+      FROM question_hashtag
+      WHERE question_hashtag."createdAt" >= :some_date::date
+      GROUP BY question_hashtag."HashtagId") as asoc, (select "Hashtags".id, "Hashtags".hashtag from "Hashtags") as ha
+      WHERE ha.id = asoc."HashtagId"
+      order by id_count desc`
+      , {
+        replacements: { some_date: parsedDate.format('YYYY-MM-DD HH:mm:ss') }
+      })
+      console.log(records)
+      return records
+    } catch (err) {
+      logger.error('Cannot find hashtags', err)
+      throw createError(500, 'Cannot find hashtags')
+    }
   }
 }
 

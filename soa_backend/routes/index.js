@@ -8,4 +8,7 @@ router.use('/users', users)
 const questions = require('./questions')
 router.use('/questions', questions)
 
+const hashtags = require('./hashtags')
+router.use('/hashtags', hashtags)
+
 module.exports = router

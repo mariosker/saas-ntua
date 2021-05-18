@@ -43,6 +43,7 @@ class Question {
       logger.error('Create question not working', err)
       throw createError(500, 'Cannot create question')
     }
+    return (returnValue)
   }
 
   async associateHashtags (data, question) {
