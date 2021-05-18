@@ -12,7 +12,6 @@ async function aux (value) {
       logger.error(err)
     }
   }
-  console.log(returnValues)
   return returnValues
 }
 

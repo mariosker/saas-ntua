@@ -49,7 +49,10 @@ class Database {
     models.Question.belongsTo(models.User)
 
     models.User.hasMany(models.Answer)
+    models.Answer.belongsTo(models.User)
+
     models.Question.hasMany(models.Answer)
+    models.Answer.belongsTo(models.Question)
 
     models.Question.belongsToMany(models.Hashtag, { through: 'question_hashtag' })
     models.Hashtag.belongsToMany(models.Question, { through: 'question_hashtag' })
