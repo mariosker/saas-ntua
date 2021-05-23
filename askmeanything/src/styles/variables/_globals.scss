@@ -57,8 +57,8 @@
 }
 
 .only-for-mobile {
-  @include breakpoint-down("medium") {
-    display: block !important;
-    height: 100%;
+
+  @include breakpoint-up("medium") {
+    display: none !important;
   }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 function HomeCard (props) {
   HomeCard.propTypes = {
-    number: PropTypes.number,
+    title: PropTypes.title,
     textContent: PropTypes.string
   }
 
@@ -12,10 +12,8 @@ function HomeCard (props) {
     <Card>
         <div className="home-card">
           <div>
-            {props.number && <h1>{props.number}</h1>}
-          </div>
-          <div>
-            <p>{props.textContent}</p>
+          {props.title && <span className='home-card--h1'>{props.title} </span>}
+          <span className="home-card--span">{props.textContent}</span>
           </div>
         </div>
     </Card>

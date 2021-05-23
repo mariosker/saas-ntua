@@ -1,6 +1,7 @@
 import React from 'react'
 import HomeCards from './HomeCards'
 import Carousel from '../Carousel'
+import { QuestionForm } from '../Question'
 
 function Home () {
   const questionsAsked = [
@@ -19,6 +20,7 @@ function Home () {
       </div>
 
       <HomeCards />
+      <QuestionForm />
     </main>
   )
 }
