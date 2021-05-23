@@ -1,30 +1,30 @@
 import React from 'react'
 import HomeCard from './HomeCard'
-import TextLoop from 'react-text-loop'
+import Carousel from '../Carousel'
 
 function Home () {
+  const questionsAsked = [
+    'How to create a React project?',
+    'How to jumpstart a microservices project?',
+    'Why Javascript is so weird?',
+    'What am I doing?',
+    'How to change careers?'
+
+  ]
+
   return (
-    <main className='home'>
+    <main className="home">
       <div className="questionsAsked">
-  <h1>
-          <TextLoop>
-              <span>How to create a React project?</span>
-              <span>How to jumpstart a microservices project?</span>
-              <span>Why Javascript is so weird?</span>
-              <span>What am I doing?</span>
-              <span>How to change careers?</span>
-          </TextLoop>{''}
-  </h1>
+        <Carousel renderItem={questionsAsked.map((s, i) => <span key={i}>{s}</span>)} />
       </div>
 
-        <h1 className='welcomeMessage'>
-        </h1>
-        <div className='cards'>
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
-          <HomeCard />
-        </div>
+      <h1 className="welcomeMessage"></h1>
+      <div className="cards">
+        <HomeCard />
+        <HomeCard />
+        <HomeCard />
+        <HomeCard />
+      </div>
     </main>
   )
 }

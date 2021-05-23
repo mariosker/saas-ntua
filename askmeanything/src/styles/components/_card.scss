@@ -1,5 +1,5 @@
-@use '../variables' as *;
-@use '../mixins' as *;
+@import '../variables';
+@import '../mixins';
 
 .card {
   @include box_shadow(0, 0.25rem, 0.5rem, colorsWithOpacity($black, 0.2));
