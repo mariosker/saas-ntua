@@ -9,8 +9,8 @@ function Carousel (props) {
 
   const slide = () => {
     return setInterval(() => {
-      console.log(activeItem)
       const items = document.getElementsByClassName('carousel--item')
+      console.log(items)
       const length = items.length
       Array.from(items).forEach(e => {
         e.classList.remove('active')
@@ -23,7 +23,7 @@ function Carousel (props) {
   }
 
   useEffect(() => {
-    if (document.getElementsByClassName('active').length === 0) {
+    if (document.querySelectorAll('.carousel--item.active').length === 0) {
       document.getElementsByClassName('carousel--item')[0].classList.add('active')
     }
     const interval = slide()

@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeCard from './HomeCard'
+import HomeCards from './HomeCards'
 import Carousel from '../Carousel'
 
 function Home () {
@@ -18,13 +18,7 @@ function Home () {
         <Carousel renderItem={questionsAsked.map((s, i) => <span key={i}>{s}</span>)} />
       </div>
 
-      <h1 className="welcomeMessage"></h1>
-      <div className="cards">
-        <HomeCard />
-        <HomeCard />
-        <HomeCard />
-        <HomeCard />
-      </div>
+      <HomeCards />
     </main>
   )
 }

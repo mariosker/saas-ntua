@@ -1,5 +1,5 @@
-@import '../variables';
-@import '../mixins';
+@import "../variables";
+@import "../mixins";
 
 .home {
   h1.welcomeMessage {
@@ -17,19 +17,43 @@
   }
 
   .cards {
-    margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
+    min-height: 13rem;
+    min-width: 10rem;
 
     @include breakpoint-down("medium") {
       display: block;
+      min-height: 17rem;
     }
 
     .card {
       margin: 1.125rem;
       background-color: $white;
       padding: 1rem 1.4375rem;
+ 
+      text-align: center;
+
+      .home-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+
+        div {
+          flex: 1;
+        }
+
+        h1 {
+          padding: 1.125rem;
+          font-size: 2.75rem;
+        }
+
+        p {
+          font-size: 1.75rem;
+        }
+      }
     }
   }
 }
