@@ -4,9 +4,11 @@ const https = require('https')
 const fs = require('fs')
 const config = require('./config')
 const { Sequelize } = require('sequelize')
-const User = require('./components/user.model')
+const Question = require('./components/question.model')
+const Bus = require('./components/worker')
 
 let sequelize
+let bus
 
 function errorHandler (err, req, res, next) {
   const errorDetails = {
@@ -68,19 +70,19 @@ async function setDatabase () {
   await sequelize.authenticate()
   console.log('Database connection has been established successfully.')
 
-  const modelDefiners = [User]
+  const modelDefiners = [Question]
   for (const modelDefiner of modelDefiners) {
     modelDefiner(sequelize)
   }
 
-  await sequelize.sync()
+  await sequelize.sync({ force: true })
 }
 
 (async () => {
   await setDatabase()
-  const MessageReceiver = require('./components/worker')
-  const messageReceiver = new MessageReceiver()
+  bus = new Bus()
   setServer()
 })()
 
 module.exports.sequelize = sequelize
+module.exports.bus = bus
