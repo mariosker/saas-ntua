@@ -8,9 +8,9 @@ app.post('users/login')
 // app.post('questions/')
 app.post('questions/:question_id/:user_id/answers')
 app.get('questions/')
-app.get('questions/count/:from')
+// app.get('questions/count/:from')
 
-app.post('hashtags/get_popular')
+// app.post('hashtags/get_popular')
 
 app.listen(port, function () {
   console.log('Server started on port: ' + port)

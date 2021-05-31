@@ -5,7 +5,6 @@ const fs = require('fs')
 const config = require('./config')
 const { Sequelize } = require('sequelize')
 const Question = require('./components/question.model')
-const Bus = require('./components/worker')
 
 let sequelize
 let bus
@@ -75,11 +74,12 @@ async function setDatabase () {
     modelDefiner(sequelize)
   }
 
-  await sequelize.sync({ force: true })
+  await sequelize.sync()
 }
 
 (async () => {
   await setDatabase()
+  const Bus = require('./components/worker')
   bus = new Bus()
   setServer()
 })()

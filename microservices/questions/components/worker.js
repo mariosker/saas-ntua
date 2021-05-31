@@ -1,5 +1,6 @@
 const amqp = require('amqplib/callback_api')
-
+const QuestionService = require('./questionService')
+const questionService = new QuestionService()
 class Bus {
   checkUserId (id, fn) {
     const self = this
@@ -38,6 +39,56 @@ class Bus {
       })
     })
   }
+
+  // ******************************************
+  // checkQuestionId () {
+  //   amqp.connect('amqp://localhost', function (error0, connection) {
+  //     if (error0) {
+  //       throw error0
+  //     }
+  //     connection.createChannel(function (error1, channel) {
+  //       if (error1) {
+  //         throw error1
+  //       }
+  //       const queue = 'questionIdQueue'
+
+  //       channel.assertQueue(queue, {
+  //         durable: false
+  //       })
+  //       channel.prefetch(1)
+
+  //       channel.consume(queue, function reply (msg) {
+  //         console.log(msg)
+  //         const id = parseInt(msg.content.toString())
+  //         let ret
+
+  //         console.log(id)
+  //         questionService.getQuestion(id).then((ret) => {
+  //           console.log('QUESTION:', ret)
+  //           const sret = JSON.stringify(ret)
+  //           channel.sendToQueue(msg.properties.replyTo,
+  //             Buffer.from(sret), {
+  //               correlationId: msg.properties.correlationId
+  //             })
+
+  //           channel.ack(msg)
+  //         })
+  //           .catch((err) => {
+  //             console.log(err)
+  //             ret = JSON.stringify(false)
+  //             console.log('QUESTION:', ret)
+  //             channel.sendToQueue(msg.properties.replyTo,
+  //               Buffer.from(ret), {
+  //                 correlationId: msg.properties.correlationId
+  //               })
+
+  //             channel.ack(msg)
+  //           })
+  //       })
+  //     })
+  //   })
+  // }
+  // ******************************************
 
   generateUuid () {
     return Math.random().toString() +
