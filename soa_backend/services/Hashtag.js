@@ -36,13 +36,13 @@ class Hashtag {
     }
     try {
       const records = await sequelize.query(
-      `select ha.hashtag, asoc."HashtagId" , asoc.id_count
-      FROM (select question_hashtag."HashtagId" , COUNT(*) as id_count
+      `select ha.hashtag, asoc.hashtag_count
+      FROM (select question_hashtag."HashtagId" , COUNT(*) as hashtag_count
       FROM question_hashtag
       WHERE question_hashtag."createdAt" >= :some_date::date
       GROUP BY question_hashtag."HashtagId") as asoc, (select "Hashtags".id, "Hashtags".hashtag from "Hashtags") as ha
       WHERE ha.id = asoc."HashtagId"
-      order by id_count desc`
+      order by hashtag_count desc`
       , {
         replacements: { some_date: parsedDate.format('YYYY-MM-DD HH:mm:ss') }
       })

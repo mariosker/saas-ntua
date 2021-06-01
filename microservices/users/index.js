@@ -73,7 +73,7 @@ async function setDatabase () {
     modelDefiner(sequelize)
   }
 
-  await sequelize.sync()
+  await sequelize.sync({ force: true })
 }
 
 (async () => {

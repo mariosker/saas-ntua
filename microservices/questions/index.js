@@ -5,6 +5,7 @@ const fs = require('fs')
 const config = require('./config')
 const { Sequelize } = require('sequelize')
 const Question = require('./components/question.model')
+const Answer = require('./components/answer.model')
 
 let sequelize
 let bus
@@ -69,12 +70,12 @@ async function setDatabase () {
   await sequelize.authenticate()
   console.log('Database connection has been established successfully.')
 
-  const modelDefiners = [Question]
+  const modelDefiners = [Question, Answer]
   for (const modelDefiner of modelDefiners) {
     modelDefiner(sequelize)
   }
 
-  await sequelize.sync()
+  await sequelize.sync({ force: true })
 }
 
 (async () => {
