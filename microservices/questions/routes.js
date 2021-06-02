@@ -72,26 +72,4 @@ async function countQuestionsByDate (req, res, next) {
 
 router.get('/questions/count/:from', countQuestionsByDate)
 
-async function answerQuestion (req, res, next) {
-  const answer = req.body
-  const questionId = req.params.question_id
-  const userId = req.params.user_id
-
-  bus.checkUserId(userId, async (user) => {
-    if (user === false) {
-      console.log('No such user')
-      return next(createError(500, 'No such user'))
-    }
-    try {
-      const retAnswer = await questionService.answerQuestion(userId, questionId, answer)
-      res.send(retAnswer.dataValues)
-    } catch (error) {
-      console.log(error)
-      next(createError(500, 'Error creating Answer', error))
-    }
-  })
-}
-
-router.post('/questions/:question_id/:user_id/answers', answerQuestion)
-
 module.exports = router
