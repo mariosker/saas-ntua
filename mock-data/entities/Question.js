@@ -40,7 +40,11 @@ class Question {
     }
     const data = JSON.stringify(Question.questions)
     await fs.writeFileSync('questions.json', data)
-    return User.newUsers
+    return Question.questions
+  }
+
+  get questions () {
+    return Question.questions
   }
 }
 
