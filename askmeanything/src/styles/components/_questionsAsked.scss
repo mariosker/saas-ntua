@@ -1,0 +1,9 @@
+@import "../variables";
+@import "../mixins";
+
+.questionsAsked {
+  font-size: 1.5rem;
+  color: $royal-blue-dark;
+  text-align: center;
+  padding: 1rem 0;
+}
