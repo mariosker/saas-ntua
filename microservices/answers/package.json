@@ -9,17 +9,17 @@
     "joi": "^17.4.0",
     "moment": "^2.29.1",
     "pg": "^8.6.0",
-    "sequelize": "^6.6.2",
+    "sequelize": "^6.6.4",
     "validator": "^13.6.0"
   },
   "description": "",
   "devDependencies": {
-    "eslint": "^7.27.0",
+    "eslint": "^7.29.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.9"
   },
   "license": "ISC",
   "main": "index.js",
