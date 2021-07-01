@@ -12,13 +12,13 @@ async function createQuestion (req, res, next) {
   const question = req.body
   try {
     const validQuestion = questionService.validateQuestion(question)
-    bus.checkUserId(validQuestion.UserId, (user) => {
+    bus.checkUserId(validQuestion.UserId, async (user) => {
       if (user === false) {
         console.log('No such user')
         return next(createError(500, 'No such user'))
       }
-      questionService.create(validQuestion)
-      res.send(validQuestion)
+      const result = await questionService.create(validQuestion)
+      res.send(result.dataValues)
     })
   } catch (error) {
     console.log(error)
