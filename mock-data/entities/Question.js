@@ -1,7 +1,7 @@
 const axios = require('axios')
 const faker = require('faker')
 const fs = require('fs')
-
+const config = require('../config')
 const Hashtags = require('./Hashtags')
 const hashtags = new Hashtags()
 
@@ -13,7 +13,7 @@ const picker = require('./picker')
 class Question {
   async createQuestion (data) {
     try {
-      const result = await axios.post('https://localhost:3000/questions/', data)
+      const result = await axios.post(config.questionsURL + '/questions/', data)
       console.log(result)
       return result.data
     } catch (err) {

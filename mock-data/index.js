@@ -6,7 +6,7 @@ const user = new User()
 const Question = require('./entities/Question')
 const question = new Question()
 
-const Answer = require('./entities/Answer')
+const Answer = require('./entities/Answers')
 const answer = new Answer()
 
 async function main () {
@@ -15,7 +15,8 @@ async function main () {
   console.log('Questions')
   await question.createQuestions(300)
   console.log('Answers')
-  await answer.createAnswers(150)
+  console.log(question.questions)
+  await answer.createAnswers(100)
 }
 
 main()

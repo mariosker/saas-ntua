@@ -1,11 +1,11 @@
 const axios = require('axios')
 const faker = require('faker')
 const fs = require('fs')
-
+const config = require('../config')
 class User {
   async createUser ({ username, email, password }) {
     try {
-      const result = await axios.post('https://localhost:3000/users/', {
+      const result = await axios.post(config.userURL +'/users/', {
         username: username,
         email: email,
         password: password
