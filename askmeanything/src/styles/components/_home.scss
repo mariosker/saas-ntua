@@ -1,0 +1,56 @@
+@import "../variables";
+@import "../mixins";
+
+.home {
+  h1.welcomeMessage {
+    color: $black;
+    font-style: italic;
+    font-weight: 700;
+
+    .logo--1,
+    .logo--3 {
+      color: $pumpkin;
+    }
+    .logo--2 {
+      color: $black;
+    }
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    min-height: 13rem;
+    min-width: 10rem;
+
+    @include breakpoint-down("medium") {
+      display: block;
+      min-height: 17rem;
+    }
+
+    .card {
+      margin: 1.125rem;
+      background-color: $white;
+      padding: 1rem 1.4375rem;
+
+      .home-card {
+        height: 100%;
+
+        span {
+          line-height: 6rem;
+        }
+
+        &--span {
+          font-size: 1.75rem;
+          color: $royal-blue-dark;
+        }
+
+        &--h1 {
+          font-size: 6rem !important;
+          color: $pumpkin !important;
+          line-height: 1;
+        }
+      }
+    }
+  }
+}
