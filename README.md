@@ -1,4 +1,4 @@
-# SaaS @ NTUA
+# Just another stack exchange clone
 ## This a project for the saas course @ NTUA.
 
 This repository contains two different implementations of a simpler StackExchange clone:
